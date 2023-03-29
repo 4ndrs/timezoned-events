@@ -1,9 +1,9 @@
 import { EventsProvider } from "@/context";
-import EventManger from "@/components/eventManager";
+import EventManager from "@/components/eventManager";
 
 const Home = () => (
   <EventsProvider>
-    <EventManger />
+    <EventManager />
   </EventsProvider>
 );
 
