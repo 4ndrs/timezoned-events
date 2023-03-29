@@ -1,5 +1,10 @@
-import EventManger from "../components/eventManager";
+import { EventsProvider } from "@/context";
+import EventManger from "@/components/eventManager";
 
-const Home = () => <EventManger />;
+const Home = () => (
+  <EventsProvider>
+    <EventManger />
+  </EventsProvider>
+);
 
 export default Home;

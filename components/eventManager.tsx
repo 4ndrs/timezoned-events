@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useEvents } from "@/context";
 import TimeVisualizer from "./timeVisualizer";
 
-import type { TimezonedEvent } from "../interfaces";
-
 const EventManager = () => {
-  const [event, setEvent] = useState<TimezonedEvent>();
+  const { state: events, dispatch } = useEvents();
 
   const handleClick = () => {
     const date = "2023-03-28T13:55:31";
+    const event = { name: "test", utcOffset: "+02:00" as const, date };
 
-    setEvent({ name: "test", utcOffset: "+02:00", date });
+    dispatch({ type: "add", payload: event });
   };
 
-  if (!event) {
+  if (events.length < 1) {
     return (
       <>
         <div>No events set, yet.</div>
@@ -21,7 +20,9 @@ const EventManager = () => {
     );
   }
 
-  return <TimeVisualizer date={new Date(event.date + event.utcOffset)} />;
+  const selectedEventDate = new Date(events[0].date + events[0].utcOffset);
+
+  return <TimeVisualizer date={selectedEventDate} />;
 };
 
 export default EventManager;
