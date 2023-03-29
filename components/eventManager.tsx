@@ -1,21 +1,33 @@
+import { useState } from "react";
 import { useEvents } from "@/context";
+
 import TimeVisualizer from "./timeVisualizer";
+import AddEventDialog from "./addEventDialog";
+import { TimezonedEvent } from "@/interfaces";
 
 const EventManager = () => {
+  const [showAddDialog, setShowAddDialog] = useState(false);
+
   const { state: events, dispatch } = useEvents();
 
-  const handleClick = () => {
-    const date = "2023-03-28T13:55:31";
-    const event = { name: "test", utcOffset: "+02:00" as const, date };
+  const handleCloseAddDialog = (event?: TimezonedEvent) => {
+    if (event) {
+      dispatch({ type: "add", payload: event });
+    }
 
-    dispatch({ type: "add", payload: event });
+    setShowAddDialog(false);
   };
 
   if (events.length < 1) {
     return (
       <>
+        <AddEventDialog open={showAddDialog} onClose={handleCloseAddDialog} />
+
         <div>No events set, yet.</div>
-        <button onClick={handleClick}>Click here to add an event</button>
+
+        <button onClick={() => setShowAddDialog(true)}>
+          Click here to add an event
+        </button>
       </>
     );
   }

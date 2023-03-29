@@ -71,4 +71,4 @@ const exportedForTesting = {
 
 export type UTCOffset = typeof UTC_OFFSETS[number];
 
-export { exportedForTesting };
+export { exportedForTesting, UTC_OFFSETS, LOCAL_OFFSET };
