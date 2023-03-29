@@ -3,7 +3,10 @@ import { useEvents } from "@/context";
 
 import TimeVisualizer from "./timeVisualizer";
 import AddEventDialog from "./addEventDialog";
-import { TimezonedEvent } from "@/interfaces";
+
+import styles from "./eventManager.module.css";
+
+import type { TimezonedEvent } from "@/interfaces";
 
 const EventManager = () => {
   const [showAddDialog, setShowAddDialog] = useState(false);
@@ -23,7 +26,7 @@ const EventManager = () => {
       <>
         <AddEventDialog open={showAddDialog} onClose={handleCloseAddDialog} />
 
-        <div>No events set, yet.</div>
+        <div className={styles.displayText}>No events set, yet.</div>
 
         <button onClick={() => setShowAddDialog(true)}>
           Click here to add an event
@@ -34,7 +37,11 @@ const EventManager = () => {
 
   const selectedEventDate = new Date(events[0].date + events[0].utcOffset);
 
-  return <TimeVisualizer date={selectedEventDate} />;
+  return (
+    <div className={styles.displayText}>
+      <TimeVisualizer date={selectedEventDate} /> {events[0].name}
+    </div>
+  );
 };
 
 export default EventManager;
