@@ -1,0 +1,20 @@
+.dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.form,
+.formChild {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  gap: 10px;
+}

@@ -3,17 +3,19 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
 
+import styles from "./addEventDialog.module.css";
+
 import type { TimezonedEvent } from "@/interfaces";
 
 type Props = { open: boolean; onClose: (event?: TimezonedEvent) => void };
-type Inputs = { name: string; date: string; time: string; offset: UTCOffset };
+type Inputs = { title: string; date: string; time: string; offset: UTCOffset };
 
 const AddEventDialog = ({ open, onClose }: Props) => {
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
-      name: data.name,
+      name: data.title,
       date: data.date + "T" + data.time,
       utcOffset: data.offset,
     };
@@ -22,28 +24,42 @@ const AddEventDialog = ({ open, onClose }: Props) => {
   };
 
   const content = (
-    <div className="dialog">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Name</label>
-        <input {...register("name")} />
+    <div className={styles.dialog}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <div className={styles.formChild}>
+          <label htmlFor="title">Event title</label>
+          <input id="title" {...register("title")} />
+        </div>
 
-        <label>Date</label>
-        <input type="date" {...register("date")} />
+        <div className={styles.formChild}>
+          <label htmlFor="date">Date</label>
+          <input id="date" type="date" {...register("date")} />
+        </div>
 
-        <label>Time</label>
-        <input type="time" {...register("time")} />
+        <div className={styles.formChild}>
+          <label htmlFor="time">Time</label>
+          <input id="time" type="time" {...register("time")} />
+        </div>
 
-        <label>UTC offset</label>
-        <select defaultValue={LOCAL_OFFSET} {...register("offset")}>
-          {UTC_OFFSETS.map((offset) => (
-            <option key={offset}>{offset}</option>
-          ))}
-        </select>
+        <div className={styles.formChild}>
+          <label htmlFor="offset">UTC offset</label>
+          <select
+            id="offset"
+            defaultValue={LOCAL_OFFSET}
+            {...register("offset")}
+          >
+            {UTC_OFFSETS.map((offset) => (
+              <option key={offset}>{offset}</option>
+            ))}
+          </select>
+        </div>
 
-        <button type="submit">Add</button>
-        <button type="button" onClick={() => onClose()}>
-          Cancel
-        </button>
+        <div className={styles.formChild}>
+          <button type="submit">Add</button>
+          <button type="button" onClick={() => onClose()}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
