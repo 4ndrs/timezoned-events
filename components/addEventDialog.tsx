@@ -23,44 +23,54 @@ const AddEventDialog = ({ open, onClose }: Props) => {
     onClose(event);
   };
 
+  const handleOverlayClick = (event: React.MouseEvent) => {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    onClose();
+  };
+
   const content = (
-    <div className={styles.dialog}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.formChild}>
-          <label htmlFor="title">Event title</label>
-          <input id="title" {...register("title")} />
-        </div>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
+      <div className={styles.dialog}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <div className={styles.formChild}>
+            <label htmlFor="title">Event title</label>
+            <input id="title" {...register("title")} />
+          </div>
 
-        <div className={styles.formChild}>
-          <label htmlFor="date">Date</label>
-          <input id="date" type="date" {...register("date")} />
-        </div>
+          <div className={styles.formChild}>
+            <label htmlFor="date">Date</label>
+            <input id="date" type="date" {...register("date")} />
+          </div>
 
-        <div className={styles.formChild}>
-          <label htmlFor="time">Time</label>
-          <input id="time" type="time" {...register("time")} />
-        </div>
+          <div className={styles.formChild}>
+            <label htmlFor="time">Time</label>
+            <input id="time" type="time" {...register("time")} />
+          </div>
 
-        <div className={styles.formChild}>
-          <label htmlFor="offset">UTC offset</label>
-          <select
-            id="offset"
-            defaultValue={LOCAL_OFFSET}
-            {...register("offset")}
-          >
-            {UTC_OFFSETS.map((offset) => (
-              <option key={offset}>{offset}</option>
-            ))}
-          </select>
-        </div>
+          <div className={styles.formChild}>
+            <label htmlFor="offset">UTC offset</label>
+            <select
+              id="offset"
+              defaultValue={LOCAL_OFFSET}
+              {...register("offset")}
+            >
+              {UTC_OFFSETS.map((offset) => (
+                <option key={offset}>{offset}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className={styles.formChild}>
-          <button type="submit">Add</button>
-          <button type="button" onClick={() => onClose()}>
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div className={styles.formChild}>
+            <button type="submit">Add</button>
+            <button type="button" onClick={() => onClose()}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 
