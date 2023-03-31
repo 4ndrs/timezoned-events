@@ -4,10 +4,25 @@ const TimeVisualizer = ({ date }: { date: Date }) => {
   const timer = useTimer(date.getTime());
   const time = parseTime(Math.abs(timer));
 
+  const days =
+    time.days < 1 ? "" : `${time.days} ${time.days > 1 ? "days" : "day"}`;
+
+  const hours =
+    time.hours < 1 ? "" : `${time.hours} ${time.hours > 1 ? "hours" : "hour"}`;
+
+  const minutes =
+    time.minutes < 1
+      ? ""
+      : `${time.minutes} ${time.minutes > 1 ? "minutes" : "minute"}`;
+
+  const seconds = `${time.seconds} ${
+    time.seconds !== 1 ? "seconds" : "second"
+  }`;
+
   return (
     <>
-      {time.days} days {time.hours} hours {time.minutes} minutes and{" "}
-      {time.seconds} seconds {timer > 0 ? "until" : "have passed since"}
+      {days} {hours} {minutes} {seconds}{" "}
+      {timer > 0 ? "until" : "have passed since"}
     </>
   );
 };
