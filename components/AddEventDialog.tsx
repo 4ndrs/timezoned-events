@@ -3,7 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
 
-import styles from "./addEventDialog.module.css";
+import styles from "./AddEventDialog.module.css";
 
 import type { TimezonedEvent } from "@/interfaces";
 
