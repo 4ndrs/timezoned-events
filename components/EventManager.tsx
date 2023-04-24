@@ -4,7 +4,7 @@ import { useEvents } from "@/context";
 import TimeVisualizer from "./timeVisualizer";
 import AddEventDialog from "./addEventDialog";
 
-import styles from "./eventManager.module.css";
+import styles from "./EventManager.module.css";
 
 import type { TimezonedEvent } from "@/interfaces";
 

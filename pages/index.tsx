@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import { EventsProvider } from "@/context";
-import EventManager from "@/components/eventManager";
+import EventManager from "@/components/EventManager";
 import Layout from "@/components/Layout";
 
 const Home = () => (
