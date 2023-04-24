@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "./layout.module.css";
+import styles from "./Layout.module.css";
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className={styles.container}>
