@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEvents } from "@/context";
 
-import TimeVisualizer from "./timeVisualizer";
+import TimeVisualizer from "./TimeVisualizer";
 import AddEventDialog from "./AddEventDialog";
 
 import styles from "./EventManager.module.css";
