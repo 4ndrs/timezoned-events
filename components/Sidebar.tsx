@@ -76,6 +76,13 @@ const Sidebar = () => {
             borderColor={
               selectedEventId === event.id ? "teal.500" : "transparent"
             }
+            onClick={() =>
+              dispatch({ type: "updateSelectedEvent", payload: event.id })
+            }
+            _hover={{
+              backgroundColor: "gray.50",
+              cursor: "pointer",
+            }}
           >
             <Text color="gray.800" fontSize="2xl">
               {event.title}
