@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Heading, Button } from "@chakra-ui/react";
 import { MoonIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
@@ -67,26 +67,35 @@ const Sidebar = () => {
         {events.map((event) => (
           <Box
             key={event.id}
+            as="label"
             alignSelf="stretch"
             h="65px"
             borderRight="6px solid"
             display="flex"
             alignItems="center"
             justifyContent="center"
+            color="gray.800"
+            fontSize="2xl"
             borderColor={
               selectedEventId === event.id ? "teal.500" : "transparent"
-            }
-            onClick={() =>
-              dispatch({ type: "updateSelectedEvent", payload: event.id })
             }
             _hover={{
               backgroundColor: "gray.50",
               cursor: "pointer",
             }}
           >
-            <Text color="gray.800" fontSize="2xl">
-              {event.title}
-            </Text>
+            <Box
+              as="input"
+              type="radio"
+              name="sidebarEvent"
+              pos="absolute"
+              visibility="hidden"
+              checked={selectedEventId === event.id}
+              onChange={() =>
+                dispatch({ type: "updateSelectedEvent", payload: event.id })
+              }
+            />
+            {event.title}
           </Box>
         ))}
 
