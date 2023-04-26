@@ -2,17 +2,23 @@ import { createContext, useContext, useReducer } from "react";
 
 import type { TimezonedEvent } from "@/interfaces";
 
-type Action = { type: "add"; payload: TimezonedEvent };
-type Dispatch = (action: Action) => void;
+type Action =
+  | { type: "add"; payload: TimezonedEvent }
+  | { type: "updateSelectedEvent"; payload: string };
+
 type State = { events: TimezonedEvent[]; selectedEventId?: string };
+type Dispatch = (action: Action) => void;
 
 const eventsReducer = (state: State, action: Action) => {
   switch (action.type) {
     case "add":
       return { ...state, events: [...state.events, action.payload] };
 
+    case "updateSelectedEvent":
+      return { ...state, selectedEventId: action.payload };
+
     default:
-      return assertNever(action.type);
+      return assertNever(action);
   }
 };
 
