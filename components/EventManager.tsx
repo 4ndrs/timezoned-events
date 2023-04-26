@@ -11,7 +11,10 @@ import type { TimezonedEvent } from "@/interfaces";
 const EventManager = () => {
   const [showAddDialog, setShowAddDialog] = useState(false);
 
-  const { state: events, dispatch } = useEvents();
+  const {
+    state: { events },
+    dispatch,
+  } = useEvents();
 
   const handleCloseAddDialog = (event?: TimezonedEvent) => {
     if (event) {
@@ -35,11 +38,11 @@ const EventManager = () => {
     );
   }
 
-  const selectedEventDate = new Date(events[0].date + events[0].utcOffset);
+  const selectedEventDate = new Date(events[0].date + events[0].offset);
 
   return (
     <div className={styles.displayText}>
-      <TimeVisualizer date={selectedEventDate} /> {events[0].name}
+      <TimeVisualizer date={selectedEventDate} /> {events[0].title}
     </div>
   );
 };
