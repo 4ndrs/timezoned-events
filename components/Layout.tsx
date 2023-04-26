@@ -1,8 +1,10 @@
+import { Box } from "@chakra-ui/react";
+
 import Head from "next/head";
-import styles from "./Layout.module.css";
+import Sidebar from "./Sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <div className={styles.container}>
+  <Box display="flex">
     <Head>
       <meta
         name="description"
@@ -10,8 +12,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
       />
     </Head>
 
-    <main className={styles.main}>{children}</main>
-  </div>
+    <Sidebar />
+    {children}
+  </Box>
 );
 
 export default Layout;
