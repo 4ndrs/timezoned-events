@@ -1,4 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { EventsProvider } from "@/context";
 import { Inter } from "next/font/google";
 
 import "@/styles/globals.css";
@@ -10,7 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 const App = ({ Component, pageProps }: AppProps) => (
   <div className={inter.className}>
     <ChakraProvider>
-      <Component {...pageProps} />
+      <EventsProvider>
+        <Component {...pageProps} />
+      </EventsProvider>
     </ChakraProvider>
   </div>
 );

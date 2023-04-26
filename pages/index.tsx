@@ -3,8 +3,6 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import EventManager from "@/components/EventManager";
 
-import { EventsProvider } from "@/context";
-
 const Home = () => (
   <Layout>
     <Head>
@@ -12,9 +10,7 @@ const Home = () => (
     </Head>
 
     <main>
-      <EventsProvider>
-        <EventManager />
-      </EventsProvider>
+      <EventManager />
     </main>
   </Layout>
 );
