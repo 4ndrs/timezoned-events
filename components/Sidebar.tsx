@@ -12,6 +12,7 @@ const Sidebar = () => (
     display="flex"
     flexDirection="column"
     alignItems="center"
+    flexShrink="0"
   >
     <Heading color="gray.800" as="h1" fontSize="26px" mt="59" mb="67">
       Timezoned Events
