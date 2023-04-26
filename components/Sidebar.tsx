@@ -7,7 +7,7 @@ const Sidebar = () => (
     pos="sticky"
     h="100vh"
     w="307px"
-    color="white"
+    backgroundColor="white"
     boxShadow="2xl"
     display="flex"
     flexDirection="column"

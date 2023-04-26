@@ -4,7 +4,7 @@ import Head from "next/head";
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <Box display="flex">
+  <Box display="flex" backgroundColor="gray.50">
     <Head>
       <meta
         name="description"
