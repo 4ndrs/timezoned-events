@@ -1,7 +1,8 @@
+import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 
-import Head from "next/head";
 import Sidebar from "./Sidebar";
+import Footer from "./Footer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <Box display="flex" backgroundColor="gray.50">
@@ -16,11 +17,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
     <Box
       display="flex"
       flexDirection="column"
-      justifyContent="center"
+      justifyContent="space-between"
       ml="auto"
       mr="auto"
     >
       {children}
+      <Footer />
     </Box>
   </Box>
 );
