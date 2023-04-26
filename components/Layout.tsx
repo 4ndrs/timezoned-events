@@ -13,7 +13,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
     </Head>
 
     <Sidebar />
-    {children}
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      ml="auto"
+      mr="auto"
+    >
+      {children}
+    </Box>
   </Box>
 );
 
