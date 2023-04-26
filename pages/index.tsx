@@ -1,8 +1,9 @@
 import Head from "next/head";
 
-import { EventsProvider } from "@/context";
-import EventManager from "@/components/EventManager";
 import Layout from "@/components/Layout";
+import EventManager from "@/components/EventManager";
+
+import { EventsProvider } from "@/context";
 
 const Home = () => (
   <Layout>
@@ -10,9 +11,11 @@ const Home = () => (
       <title>Timezoned Events</title>
     </Head>
 
-    <EventsProvider>
-      <EventManager />
-    </EventsProvider>
+    <main>
+      <EventsProvider>
+        <EventManager />
+      </EventsProvider>
+    </main>
   </Layout>
 );
 
