@@ -4,12 +4,12 @@ import type { TimezonedEvent } from "@/interfaces";
 
 type Action = { type: "add"; payload: TimezonedEvent };
 type Dispatch = (action: Action) => void;
-type State = TimezonedEvent[];
+type State = { events: TimezonedEvent[]; selectedEventId?: string };
 
 const eventsReducer = (state: State, action: Action) => {
   switch (action.type) {
     case "add":
-      return [...state, action.payload];
+      return { ...state, events: [...state.events, action.payload] };
 
     default:
       return assertNever(action.type);
@@ -25,7 +25,7 @@ const EventsContext = createContext<
 >(undefined);
 
 const EventsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(eventsReducer, []);
+  const [state, dispatch] = useReducer(eventsReducer, { events: [] });
 
   const value = { state, dispatch };
 
