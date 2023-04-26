@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
@@ -7,33 +7,28 @@ import styles from "./AddEventDialog.module.css";
 
 import type { TimezonedEvent } from "@/interfaces";
 
-type Props = { open: boolean; onClose: (event?: TimezonedEvent) => void };
+type Props = { isOpen: boolean; onClose: (event?: TimezonedEvent) => void };
 type Inputs = { title: string; date: string; time: string; offset: UTCOffset };
 
-const AddEventDialog = ({ open, onClose }: Props) => {
-  const { register, handleSubmit } = useForm<Inputs>();
+const AddEventDialog = ({ isOpen, onClose }: Props) => {
+  const { register, handleSubmit, reset } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
-      name: data.title,
+      id: crypto.randomUUID(),
+      title: data.title,
       date: data.date + "T" + data.time,
-      utcOffset: data.offset,
+      offset: data.offset,
     };
 
+    reset();
     onClose(event);
   };
 
-  const handleOverlayClick = (event: React.MouseEvent) => {
-    if (event.target !== event.currentTarget) {
-      return;
-    }
-
-    onClose();
-  };
-
-  const content = (
-    <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div className={styles.dialog}>
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.formChild}>
             <label htmlFor="title">Event title</label>
@@ -70,15 +65,9 @@ const AddEventDialog = ({ open, onClose }: Props) => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </ModalContent>
+    </Modal>
   );
-
-  if (open && typeof window === "object") {
-    return createPortal(content, document.body);
-  }
-
-  return null;
 };
 
 export default AddEventDialog;
