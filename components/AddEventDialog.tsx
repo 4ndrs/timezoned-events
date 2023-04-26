@@ -1,5 +1,6 @@
 import { Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
 
@@ -15,7 +16,7 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       title: data.title,
       date: data.date + "T" + data.time,
       offset: data.offset,
