@@ -8,11 +8,11 @@ import type { AppProps } from "next/app";
 const inter = Inter({ subsets: ["latin"] });
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ChakraProvider>
-    <main className={inter.className}>
+  <div className={inter.className}>
+    <ChakraProvider>
       <Component {...pageProps} />
-    </main>
-  </ChakraProvider>
+    </ChakraProvider>
+  </div>
 );
 
 export default App;
