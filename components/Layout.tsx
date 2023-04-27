@@ -18,8 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
-      ml="auto"
-      mr="auto"
+      flex="1"
     >
       <Box mt="auto" mb="auto">
         {children}
