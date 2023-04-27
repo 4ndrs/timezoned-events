@@ -35,6 +35,7 @@ const Sidebar = () => {
       <Box
         as="aside"
         pos="sticky"
+        top="0"
         h="100vh"
         w="307px"
         backgroundColor="white"
