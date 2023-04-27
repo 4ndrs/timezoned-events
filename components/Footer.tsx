@@ -8,7 +8,7 @@ const Footer = () => (
     alignItems="center"
     fontSize="xs"
     color="gray.500"
-    mb="13px"
+    m="13px 0"
   >
     <Text>Made with lvoe by 4ndrs</Text>
     <Text>
