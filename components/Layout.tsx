@@ -21,7 +21,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
       ml="auto"
       mr="auto"
     >
-      {children}
+      <Box mt="auto" mb="auto">
+        {children}
+      </Box>
       <Footer />
     </Box>
   </Box>
