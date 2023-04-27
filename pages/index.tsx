@@ -1,7 +1,6 @@
 import Head from "next/head";
-
 import Layout from "@/components/Layout";
-import EventManager from "@/components/EventManager";
+import EventViewer from "@/components/EventViewer";
 
 const Home = () => (
   <Layout>
@@ -10,7 +9,7 @@ const Home = () => (
     </Head>
 
     <main>
-      <EventManager />
+      <EventViewer />
     </main>
   </Layout>
 );
