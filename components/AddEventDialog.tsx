@@ -85,11 +85,11 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
           </ModalBody>
 
           <ModalFooter>
+            <Button type="button" onClick={() => onClose()} mr={3}>
+              Cancel
+            </Button>
             <Button colorScheme="teal" type="submit">
               Add
-            </Button>
-            <Button type="button" onClick={() => onClose()} ml={3}>
-              Cancel
             </Button>
           </ModalFooter>
         </form>
