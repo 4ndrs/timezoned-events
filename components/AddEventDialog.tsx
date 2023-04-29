@@ -1,10 +1,24 @@
-import { Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Textarea,
+} from "@chakra-ui/react";
+
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
-
-import styles from "./AddEventDialog.module.css";
 
 import type { TimezonedEvent } from "@/interfaces";
 
@@ -27,44 +41,57 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-          <div className={styles.formChild}>
-            <label htmlFor="title">Event title</label>
-            <input id="title" {...register("title")} />
-          </div>
+        <ModalHeader>Add event</ModalHeader>
+        <ModalCloseButton />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalBody display="flex" flexDirection="column" gap="20px">
+            <FormControl>
+              <FormLabel htmlFor="title">Title</FormLabel>
+              <Input id="title" {...register("title")} />
+            </FormControl>
 
-          <div className={styles.formChild}>
-            <label htmlFor="date">Date</label>
-            <input id="date" type="date" {...register("date")} />
-          </div>
+            <FormControl>
+              <FormLabel>Description</FormLabel>
+              <Textarea minHeight="134px" />
+            </FormControl>
 
-          <div className={styles.formChild}>
-            <label htmlFor="time">Time</label>
-            <input id="time" type="time" {...register("time")} />
-          </div>
+            <Box display="flex" gap="16px">
+              <FormControl flex="1" minWidth="0">
+                <FormLabel htmlFor="date">Date</FormLabel>
+                <Input id="date" type="date" {...register("date")} />
+              </FormControl>
 
-          <div className={styles.formChild}>
-            <label htmlFor="offset">UTC offset</label>
-            <select
-              id="offset"
-              defaultValue={LOCAL_OFFSET}
-              {...register("offset")}
-            >
-              {UTC_OFFSETS.map((offset) => (
-                <option key={offset}>{offset}</option>
-              ))}
-            </select>
-          </div>
+              <FormControl flex="1" minWidth="0">
+                <FormLabel htmlFor="time">Time</FormLabel>
+                <Input id="time" type="time" {...register("time")} />
+              </FormControl>
 
-          <div className={styles.formChild}>
-            <button type="submit">Add</button>
-            <button type="button" onClick={() => onClose()}>
+              <FormControl flex="1" minWidth="0">
+                <FormLabel htmlFor="offset">UTC offset</FormLabel>
+                <Select
+                  id="offset"
+                  defaultValue={LOCAL_OFFSET}
+                  {...register("offset")}
+                >
+                  {UTC_OFFSETS.map((offset) => (
+                    <option key={offset}>{offset}</option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="teal" type="submit">
+              Add
+            </Button>
+            <Button type="button" onClick={() => onClose()} ml={3}>
               Cancel
-            </button>
-          </div>
+            </Button>
+          </ModalFooter>
         </form>
       </ModalContent>
     </Modal>
