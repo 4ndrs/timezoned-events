@@ -6,5 +6,10 @@ export interface TimezonedEvent {
   date: string;
   offset: UTCOffset;
   description?: string;
-  links?: string[];
+  links?: Link[];
+}
+
+export interface Link {
+  title: string;
+  url: string;
 }
