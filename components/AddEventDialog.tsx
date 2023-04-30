@@ -1,3 +1,6 @@
+import { useForm, type SubmitHandler, Controller } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   Box,
   Button,
@@ -15,18 +18,23 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
-
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
+import LinksInput from "./LinksInput";
 
-import type { TimezonedEvent } from "@/interfaces";
+import type { Link, TimezonedEvent } from "@/interfaces";
 
 type Props = { isOpen: boolean; onClose: (event?: TimezonedEvent) => void };
-type Inputs = { title: string; date: string; time: string; offset: UTCOffset };
+
+type Inputs = {
+  title: string;
+  date: string;
+  time: string;
+  offset: UTCOffset;
+  links: Link[];
+};
 
 const AddEventDialog = ({ isOpen, onClose }: Props) => {
-  const { register, handleSubmit, reset } = useForm<Inputs>();
+  const { register, handleSubmit, reset, control } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
@@ -70,7 +78,7 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
               </FormControl>
 
               <FormControl flex="1" minWidth="0">
-                <FormLabel htmlFor="offset">UTC offset</FormLabel>
+                <FormLabel htmlFor="offset">UTC Offset</FormLabel>
                 <Select
                   id="offset"
                   defaultValue={LOCAL_OFFSET}
@@ -82,6 +90,17 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
                 </Select>
               </FormControl>
             </Box>
+
+            <FormControl>
+              <FormLabel>Links</FormLabel>
+              <Controller
+                control={control}
+                name="links"
+                render={({ field: { value, onChange } }) => (
+                  <LinksInput id="links" value={value} onChange={onChange} />
+                )}
+              />
+            </FormControl>
           </ModalBody>
 
           <ModalFooter>
