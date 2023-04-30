@@ -17,14 +17,28 @@ import {
 
 import type { Link } from "@/interfaces";
 
-type Props = { isOpen: boolean; onClose: (link?: Link) => void };
+type Props = {
+  isOpen: boolean;
+  onClose: (link?: Link) => void;
+  existingTitles: string[];
+};
 
-const AddLinkModal = ({ isOpen, onClose }: Props) => {
+const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
   const { register, reset, handleSubmit } = useForm<Link>();
 
   const onSubmit: SubmitHandler<Link> = (link) => {
     onClose(link);
     reset();
+  };
+
+  const validateTitle = (title: string) => {
+    if (!title) {
+      return "Required";
+    }
+
+    if (existingTitles.includes(title)) {
+      return "Title must be unique";
+    }
   };
 
   return (
@@ -44,11 +58,19 @@ const AddLinkModal = ({ isOpen, onClose }: Props) => {
             <Box display="flex" gap="10px">
               <FormControl width="150px">
                 <FormLabel>Title</FormLabel>
-                <Input {...register("title", { required: true })} />
+                <Input
+                  {...register("title", {
+                    validate: validateTitle,
+                  })}
+                />
               </FormControl>
               <FormControl>
                 <FormLabel>URL</FormLabel>
-                <Input {...register("url", { required: true })} />
+                <Input
+                  {...register("url", {
+                    required: true,
+                  })}
+                />
               </FormControl>
             </Box>
           </ModalBody>

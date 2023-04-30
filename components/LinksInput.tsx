@@ -56,7 +56,11 @@ const LinksInput = ({ id, value = [], onChange }: Props) => {
         </WrapItem>
       </Wrap>
 
-      <AddLinkModal isOpen={addUrlIsOpen} onClose={handleAddUrlClose} />
+      <AddLinkModal
+        isOpen={addUrlIsOpen}
+        onClose={handleAddUrlClose}
+        existingTitles={value.map((link) => link.title)}
+      />
     </>
   );
 };
