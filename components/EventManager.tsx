@@ -27,8 +27,6 @@ const EventManager = () => {
   if (events.length < 1) {
     return (
       <>
-        <AddEventDialog open={showAddDialog} onClose={handleCloseAddDialog} />
-
         <div className={styles.displayText}>No events set, yet.</div>
 
         <button onClick={() => setShowAddDialog(true)}>
