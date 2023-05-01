@@ -15,7 +15,6 @@ const ImagePicker = ({ value, onChange }: Props) => {
   const [pickedImageIndex, setPickedImageIndex] = useState(0);
 
   useEffect(() => {
-    console.log(value);
     if (!value) {
       setPickedImageIndex(0);
     } else {
