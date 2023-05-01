@@ -93,7 +93,7 @@ const Sidebar = () => {
               visibility="hidden"
               checked={selectedEventId === event.id}
               onChange={() =>
-                dispatch({ type: "updateSelectedEvent", payload: event.id })
+                dispatch({ type: "updateSelectedEvent", id: event.id })
               }
             />
             {event.title}
