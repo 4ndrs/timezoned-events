@@ -29,6 +29,7 @@ type Props = { isOpen: boolean; onClose: (event?: TimezonedEvent) => void };
 
 type Inputs = {
   title: string;
+  description?: string;
   date: string;
   time: string;
   offset: UTCOffset;
@@ -65,8 +66,12 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Description</FormLabel>
-              <Textarea minHeight="134px" />
+              <FormLabel htmlFor="description">Description</FormLabel>
+              <Textarea
+                id="description"
+                minHeight="134px"
+                {...register("description")}
+              />
             </FormControl>
 
             <Box display="flex" gap="16px">
