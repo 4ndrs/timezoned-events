@@ -43,8 +43,9 @@ const DeleteDialog = ({ isOpen, onClose, eventTitle }: Props) => {
         <AlertDialogHeader>Delete event</AlertDialogHeader>
 
         <AlertDialogBody>
-          Are you sure you want to delete <strong>{eventTitle}</strong>? this
-          action cannot be undone
+          Are you sure you want to delete <strong>{eventTitle}</strong>?
+          <br />
+          This action cannot be undone.
         </AlertDialogBody>
 
         <AlertDialogFooter>
