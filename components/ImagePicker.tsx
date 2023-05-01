@@ -15,7 +15,8 @@ const ImagePicker = ({ value, onChange }: Props) => {
   const [pickedImageIndex, setPickedImageIndex] = useState(0);
 
   useEffect(() => {
-    if (typeof value === "undefined") {
+    console.log(value);
+    if (!value) {
       setPickedImageIndex(0);
     } else {
       const index = images.indexOf(value);
@@ -30,7 +31,7 @@ const ImagePicker = ({ value, onChange }: Props) => {
 
   const handleClick = (index: number) => {
     if (index === 0) {
-      return onChange();
+      return onChange("");
     }
 
     return onChange(images[index]);
