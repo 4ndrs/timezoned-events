@@ -18,24 +18,15 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
+import { UTC_OFFSETS, LOCAL_OFFSET } from "@/lib/offsets";
 
 import LinksInput from "./LinksInput";
 import ImagePicker from "./ImagePicker";
 
-import type { Link, TimezonedEvent } from "@/interfaces";
+import type { TimezonedEvent } from "@/interfaces";
 
 type Props = { isOpen: boolean; onClose: (event?: TimezonedEvent) => void };
-
-type Inputs = {
-  title: string;
-  description?: string;
-  date: string;
-  time: string;
-  offset: UTCOffset;
-  links: Link[];
-  image?: string;
-};
+type Inputs = Omit<TimezonedEvent, "id"> & { time: string };
 
 const AddEventDialog = ({ isOpen, onClose }: Props) => {
   const { register, handleSubmit, reset, control } = useForm<Inputs>();
