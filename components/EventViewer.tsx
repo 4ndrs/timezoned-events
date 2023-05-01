@@ -9,6 +9,7 @@ import { useEvents } from "@/context";
 
 const EventViewer = () => {
   const {
+    dispatch,
     state: { events, selectedEventId },
   } = useEvents();
 
@@ -21,6 +22,11 @@ const EventViewer = () => {
       </Box>
     );
   }
+
+  const handleDelete = () => {
+    dispatch({ type: "delete", id: event.id });
+    dispatch({ type: "updateSelectedEvent", payload: "" });
+  };
 
   return (
     <Card
@@ -36,7 +42,12 @@ const EventViewer = () => {
         <Button rightIcon={<EditIcon />} variant="link" colorScheme="teal">
           Edit
         </Button>
-        <Button rightIcon={<DeleteIcon />} variant="link" colorScheme="teal">
+        <Button
+          rightIcon={<DeleteIcon />}
+          variant="link"
+          colorScheme="teal"
+          onClick={handleDelete}
+        >
           Delete
         </Button>
       </Box>
