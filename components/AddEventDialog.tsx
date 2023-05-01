@@ -19,7 +19,9 @@ import {
 } from "@chakra-ui/react";
 
 import { UTC_OFFSETS, LOCAL_OFFSET, type UTCOffset } from "@/lib/offsets";
+
 import LinksInput from "./LinksInput";
+import ImagePicker from "./ImagePicker";
 
 import type { Link, TimezonedEvent } from "@/interfaces";
 
@@ -31,6 +33,7 @@ type Inputs = {
   time: string;
   offset: UTCOffset;
   links: Link[];
+  image?: string;
 };
 
 const AddEventDialog = ({ isOpen, onClose }: Props) => {
@@ -98,6 +101,16 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
                 name="links"
                 render={({ field: { value, onChange } }) => (
                   <LinksInput id="links" value={value} onChange={onChange} />
+                )}
+              />
+            </FormControl>
+
+            <FormControl>
+              <Controller
+                control={control}
+                name="image"
+                render={({ field: { value, onChange } }) => (
+                  <ImagePicker value={value} onChange={onChange} />
                 )}
               />
             </FormControl>
