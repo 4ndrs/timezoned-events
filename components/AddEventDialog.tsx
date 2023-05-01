@@ -44,8 +44,11 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
     const event: TimezonedEvent = {
       id: uuidv4(),
       title: data.title,
+      description: data.description,
       date: data.date + "T" + data.time,
       offset: data.offset,
+      links: data.links,
+      image: data.image,
     };
 
     reset();
