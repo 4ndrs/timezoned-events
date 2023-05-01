@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
  *
  */
 const useTimer = (timestamp: number) => {
-  const [seconds, setSeconds] = useState(timeDifference(timestamp));
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
+    setSeconds(timeDifference(timestamp));
+
     const id = setInterval(() => setSeconds(timeDifference(timestamp)), 1000);
 
     return () => clearInterval(id);
