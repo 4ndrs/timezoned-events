@@ -25,7 +25,7 @@ const EventViewer = () => {
 
   const handleDelete = () => {
     dispatch({ type: "delete", id: event.id });
-    dispatch({ type: "updateSelectedEvent", payload: "" });
+    dispatch({ type: "updateSelectedEvent", id: "" });
   };
 
   return (

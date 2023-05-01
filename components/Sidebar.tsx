@@ -18,7 +18,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (!selectedEventId && events.length > 0) {
-      dispatch({ type: "updateSelectedEvent", payload: events[0].id });
+      dispatch({ type: "updateSelectedEvent", id: events[0].id });
     }
   }, [selectedEventId, dispatch, events]);
 

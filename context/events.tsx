@@ -5,7 +5,7 @@ import type { TimezonedEvent } from "@/interfaces";
 type Action =
   | { type: "add"; payload: TimezonedEvent }
   | { type: "delete"; id: string }
-  | { type: "updateSelectedEvent"; payload: string };
+  | { type: "updateSelectedEvent"; id: string };
 
 type State = { events: TimezonedEvent[]; selectedEventId?: string };
 type Dispatch = (action: Action) => void;
@@ -22,7 +22,7 @@ const eventsReducer = (state: State, action: Action) => {
       };
 
     case "updateSelectedEvent":
-      return { ...state, selectedEventId: action.payload };
+      return { ...state, selectedEventId: action.id };
 
     default:
       return assertNever(action);
