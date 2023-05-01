@@ -2,8 +2,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { EventsProvider } from "@/context";
 import { Inter } from "next/font/google";
 
-import "@/styles/globals.css";
-
 import type { AppProps } from "next/app";
 
 const inter = Inter({ subsets: ["latin"] });
