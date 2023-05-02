@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Modal,
@@ -24,7 +25,12 @@ type Props = {
 };
 
 const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
-  const { register, reset, handleSubmit } = useForm<Link>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Link>();
 
   const onSubmit: SubmitHandler<Link> = (link) => {
     onClose(link);
@@ -56,21 +62,23 @@ const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
 
           <ModalBody color="gray.500">
             <Box display="flex" gap="10px">
-              <FormControl width="150px">
+              <FormControl width="150px" isInvalid={!!errors.title}>
                 <FormLabel>Title</FormLabel>
                 <Input
                   {...register("title", {
                     validate: validateTitle,
                   })}
                 />
+                <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={!!errors.url}>
                 <FormLabel>URL</FormLabel>
                 <Input
                   {...register("url", {
-                    required: true,
+                    required: "Required",
                   })}
                 />
+                <FormErrorMessage>{errors.url?.message}</FormErrorMessage>
               </FormControl>
             </Box>
           </ModalBody>
