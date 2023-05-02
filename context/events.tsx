@@ -5,6 +5,7 @@ import type { TimezonedEvent } from "@/interfaces";
 type Action =
   | { type: "add"; payload: TimezonedEvent }
   | { type: "delete"; id: string }
+  | { type: "edit"; payload: TimezonedEvent }
   | { type: "updateSelectedEvent"; id: string };
 
 type State = { events: TimezonedEvent[]; selectedEventId?: string };
@@ -19,6 +20,18 @@ const eventsReducer = (state: State, action: Action) => {
       return {
         ...state,
         events: state.events.filter((event) => event.id !== action.id),
+      };
+
+    case "edit":
+      return {
+        ...state,
+        events: state.events.map((event) => {
+          if (event.id === action.payload.id) {
+            return action.payload;
+          }
+
+          return event;
+        }),
       };
 
     case "updateSelectedEvent":

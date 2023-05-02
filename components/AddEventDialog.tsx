@@ -25,15 +25,32 @@ import ImagePicker from "./ImagePicker";
 
 import type { TimezonedEvent } from "@/interfaces";
 
-type Props = { isOpen: boolean; onClose: (event?: TimezonedEvent) => void };
+type Props = {
+  isOpen: boolean;
+  onClose: (event?: TimezonedEvent) => void;
+  editEvent?: TimezonedEvent;
+};
+
 type Inputs = Omit<TimezonedEvent, "id"> & { time: string };
 
-const AddEventDialog = ({ isOpen, onClose }: Props) => {
-  const { register, handleSubmit, reset, control } = useForm<Inputs>();
+const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
+  const defaultValues = {
+    title: editEvent?.title,
+    description: editEvent?.description,
+    date: editEvent?.date.split("T")[0],
+    time: editEvent?.date.split("T")[1],
+    offset: editEvent ? editEvent.offset : LOCAL_OFFSET,
+    links: editEvent ? editEvent.links : [],
+    image: editEvent ? editEvent.image : "",
+  };
+
+  const { register, handleSubmit, reset, control } = useForm<Inputs>({
+    defaultValues,
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
-      id: uuidv4(),
+      id: editEvent ? editEvent.id : uuidv4(),
       title: data.title,
       description: data.description,
       date: data.date + "T" + data.time,
@@ -42,15 +59,22 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
       image: data.image,
     };
 
-    reset();
     onClose(event);
+
+    if (!editEvent) {
+      reset();
+    }
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add event</ModalHeader>
+        <ModalHeader>{editEvent ? "Edit" : "Add"} event</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody display="flex" flexDirection="column" gap="20px">
@@ -81,11 +105,7 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
 
               <FormControl flex="1" minWidth="0">
                 <FormLabel htmlFor="offset">UTC Offset</FormLabel>
-                <Select
-                  id="offset"
-                  defaultValue={LOCAL_OFFSET}
-                  {...register("offset")}
-                >
+                <Select id="offset" {...register("offset")}>
                   {UTC_OFFSETS.map((offset) => (
                     <option key={offset}>{offset}</option>
                   ))}
@@ -116,11 +136,11 @@ const AddEventDialog = ({ isOpen, onClose }: Props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button type="button" onClick={() => onClose()} mr={3}>
+            <Button type="button" onClick={handleClose} mr={3}>
               Cancel
             </Button>
             <Button colorScheme="teal" type="submit">
-              Add
+              {editEvent ? "Edit" : "Add"}
             </Button>
           </ModalFooter>
         </form>

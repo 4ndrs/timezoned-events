@@ -4,13 +4,17 @@ import { EditIcon, DeleteIcon, LinkIcon } from "@chakra-ui/icons";
 import { Box, Button, Card, Heading, Link, Text } from "@chakra-ui/react";
 
 import TimeVisualizer from "./TimeVisualizer";
+import AddEventDialog from "./AddEventDialog";
 import DeleteDialog from "./DeleteDialog";
 
 import { useEvents } from "@/context";
 import { useState } from "react";
 
+import type { TimezonedEvent } from "@/interfaces";
+
 const EventViewer = () => {
   const [deleteDialogIsOpen, setDeleteDialogIsOpen] = useState(false);
+  const [editDialogIsOpen, setEditDialogIsOpen] = useState(false);
 
   const {
     dispatch,
@@ -36,6 +40,14 @@ const EventViewer = () => {
     setDeleteDialogIsOpen(false);
   };
 
+  const handleEdit = (event?: TimezonedEvent) => {
+    if (event) {
+      dispatch({ type: "edit", payload: event });
+    }
+
+    setEditDialogIsOpen(false);
+  };
+
   return (
     <>
       <Card
@@ -48,7 +60,12 @@ const EventViewer = () => {
         mr="auto"
       >
         <Box alignSelf="flex-end" display="flex" gap="21">
-          <Button rightIcon={<EditIcon />} variant="link" colorScheme="teal">
+          <Button
+            rightIcon={<EditIcon />}
+            variant="link"
+            colorScheme="teal"
+            onClick={() => setEditDialogIsOpen(true)}
+          >
             Edit
           </Button>
           <Button
@@ -99,6 +116,12 @@ const EventViewer = () => {
         isOpen={deleteDialogIsOpen}
         onClose={handleDelete}
         eventTitle={event.title}
+      />
+
+      <AddEventDialog
+        isOpen={editDialogIsOpen}
+        onClose={handleEdit}
+        editEvent={event}
       />
     </>
   );
