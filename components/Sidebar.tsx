@@ -25,6 +25,7 @@ const Sidebar = () => {
   const handleAddEventDialogClose = (event?: TimezonedEvent) => {
     if (event) {
       dispatch({ type: "add", payload: event });
+      dispatch({ type: "updateSelectedEvent", id: event.id });
     }
 
     setAddEventDialogIsOpen(false);
