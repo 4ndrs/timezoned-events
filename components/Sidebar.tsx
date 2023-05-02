@@ -5,6 +5,7 @@ import {
   IconButton,
   useColorMode,
   useColorModeValue,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { MoonIcon, SunIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
@@ -64,20 +65,24 @@ const Sidebar = () => {
         </Heading>
 
         <Box display="flex" gap="37px" alignItems="center">
-          <IconButton
-            onClick={toggleColorMode}
-            aria-label={`Switch to ${
-              colorMode === "light" ? "dark" : "light"
-            } mode`}
-            icon={
-              colorMode === "light" ? (
-                <MoonIcon color="gray.500" w="30" h="30" />
-              ) : (
-                <SunIcon color="gray.500" w="35" h="35" />
-              )
-            }
-            variant="ghost"
-          />
+          <Tooltip
+            label={`Switch to ${colorMode === "light" ? "dark" : "light"} mode`}
+          >
+            <IconButton
+              onClick={toggleColorMode}
+              aria-label={`Switch to ${
+                colorMode === "light" ? "dark" : "light"
+              } mode`}
+              icon={
+                colorMode === "light" ? (
+                  <MoonIcon color="gray.500" w="30" h="30" />
+                ) : (
+                  <SunIcon color="gray.500" w="35" h="35" />
+                )
+              }
+              variant="ghost"
+            />
+          </Tooltip>
           <SettingsIcon color="gray.500" w="30" h="30" />
         </Box>
 
