@@ -51,6 +51,8 @@ const LinksInput = ({ id, value = [], onChange }: Props) => {
             aria-label="Add a new link"
             icon={<AddIcon />}
             size="sm"
+            variant="ghost"
+            color="teal.500"
             onClick={() => setAddUrlIsOpen(true)}
           />
         </WrapItem>
