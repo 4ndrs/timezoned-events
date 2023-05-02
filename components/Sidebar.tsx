@@ -1,4 +1,11 @@
-import { Box, Heading, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Button,
+  IconButton,
+  useColorMode,
+} from "@chakra-ui/react";
+
 import { MoonIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
@@ -9,6 +16,7 @@ import AddEventDialog from "./AddEventDialog";
 import type { TimezonedEvent } from "@/interfaces";
 
 const Sidebar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [addEventDialogIsOpen, setAddEventDialogIsOpen] = useState(false);
 
   const {
@@ -50,8 +58,15 @@ const Sidebar = () => {
           Timezoned Events
         </Heading>
 
-        <Box display="flex" gap="37px">
-          <MoonIcon color="gray.500" w="30" h="30" />
+        <Box display="flex" gap="37px" alignItems="center">
+          <IconButton
+            onClick={toggleColorMode}
+            aria-label={`Switch to ${
+              colorMode === "light" ? "dark" : "light"
+            } mode`}
+            icon={<MoonIcon color="gray.500" w="30" h="30" />}
+            variant="ghost"
+          />
           <SettingsIcon color="gray.500" w="30" h="30" />
         </Box>
 
