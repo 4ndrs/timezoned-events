@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Modal,
@@ -44,7 +45,13 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
     image: editEvent ? editEvent.image : "",
   };
 
-  const { register, handleSubmit, reset, control } = useForm<Inputs>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<Inputs>({
     defaultValues,
   });
 
@@ -78,43 +85,49 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody display="flex" flexDirection="column" gap="20px">
-            <FormControl>
-              <FormLabel htmlFor="title">Title</FormLabel>
-              <Input id="title" {...register("title")} />
+            <FormControl isInvalid={!!errors.title}>
+              <FormLabel>Title</FormLabel>
+              <Input {...register("title", { required: "Required" })} />
+              <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl>
-              <FormLabel htmlFor="description">Description</FormLabel>
-              <Textarea
-                id="description"
-                minHeight="134px"
-                {...register("description")}
-              />
+              <FormLabel>Description (optional)</FormLabel>
+              <Textarea minHeight="134px" {...register("description")} />
             </FormControl>
 
             <Box display="flex" gap="16px">
-              <FormControl flex="1" minWidth="0">
-                <FormLabel htmlFor="date">Date</FormLabel>
-                <Input id="date" type="date" {...register("date")} />
+              <FormControl flex="1" minWidth="0" isInvalid={!!errors.date}>
+                <FormLabel>Date</FormLabel>
+                <Input
+                  type="date"
+                  {...register("date", { required: "Required" })}
+                />
+                <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
               </FormControl>
 
-              <FormControl flex="1" minWidth="0">
-                <FormLabel htmlFor="time">Time</FormLabel>
-                <Input id="time" type="time" {...register("time")} />
+              <FormControl flex="1" minWidth="0" isInvalid={!!errors.time}>
+                <FormLabel>Time</FormLabel>
+                <Input
+                  type="time"
+                  {...register("time", { required: "Required" })}
+                />
+                <FormErrorMessage>{errors.time?.message}</FormErrorMessage>
               </FormControl>
 
-              <FormControl flex="1" minWidth="0">
-                <FormLabel htmlFor="offset">UTC Offset</FormLabel>
-                <Select id="offset" {...register("offset")}>
+              <FormControl flex="1" minWidth="0" isInvalid={!!errors.offset}>
+                <FormLabel>UTC Offset</FormLabel>
+                <Select {...register("offset", { required: "Required" })}>
                   {UTC_OFFSETS.map((offset) => (
                     <option key={offset}>{offset}</option>
                   ))}
                 </Select>
+                <FormErrorMessage>{errors.offset?.message}</FormErrorMessage>
               </FormControl>
             </Box>
 
             <FormControl>
-              <FormLabel>Links</FormLabel>
+              <FormLabel htmlFor="links">Links</FormLabel>
               <Controller
                 control={control}
                 name="links"
