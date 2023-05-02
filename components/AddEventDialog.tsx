@@ -1,5 +1,6 @@
 import { useForm, type SubmitHandler, Controller } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
 
 import {
   Box,
@@ -35,25 +36,27 @@ type Props = {
 type Inputs = Omit<TimezonedEvent, "id"> & { time: string };
 
 const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
-  const defaultValues = {
-    title: editEvent?.title,
-    description: editEvent?.description,
-    date: editEvent?.date.split("T")[0],
-    time: editEvent?.date.split("T")[1],
-    offset: editEvent ? editEvent.offset : LOCAL_OFFSET,
-    links: editEvent ? editEvent.links : [],
-    image: editEvent ? editEvent.image : "",
-  };
-
   const {
     register,
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm<Inputs>({
-    defaultValues,
-  });
+  } = useForm<Inputs>();
+
+  useEffect(() => {
+    const defaultValues = {
+      title: editEvent?.title,
+      description: editEvent?.description,
+      date: editEvent?.date.split("T")[0],
+      time: editEvent?.date.split("T")[1],
+      offset: editEvent ? editEvent.offset : LOCAL_OFFSET,
+      links: editEvent ? editEvent.links : [],
+      image: editEvent ? editEvent.image : "",
+    };
+
+    reset(defaultValues);
+  }, [editEvent, reset]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const event: TimezonedEvent = {
