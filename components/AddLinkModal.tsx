@@ -54,7 +54,7 @@ const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
           <ModalHeader>Add link</ModalHeader>
           <ModalCloseButton />
 
-          <ModalBody>
+          <ModalBody color="gray.500">
             <Box display="flex" gap="10px">
               <FormControl width="150px">
                 <FormLabel>Title</FormLabel>
