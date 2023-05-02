@@ -1,7 +1,15 @@
 import Image from "next/image";
-
 import { EditIcon, DeleteIcon, LinkIcon } from "@chakra-ui/icons";
-import { Box, Button, Card, Heading, Link, Text } from "@chakra-ui/react";
+
+import {
+  Box,
+  Button,
+  Card,
+  Heading,
+  Link,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import TimeVisualizer from "./TimeVisualizer";
 import AddEventDialog from "./AddEventDialog";
@@ -15,6 +23,10 @@ import type { TimezonedEvent } from "@/interfaces";
 const EventViewer = () => {
   const [deleteDialogIsOpen, setDeleteDialogIsOpen] = useState(false);
   const [editDialogIsOpen, setEditDialogIsOpen] = useState(false);
+
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+  const textColor = useColorModeValue("primary.darkish", "dark.darkish");
+  const tealColor = useColorModeValue("primary.teal", "dark.teal");
 
   const {
     dispatch,
@@ -58,6 +70,7 @@ const EventViewer = () => {
         maxWidth="1113px"
         ml="auto"
         mr="auto"
+        backgroundColor={bgColor}
       >
         <Box alignSelf="flex-end" display="flex" gap="21">
           <Button
@@ -78,7 +91,7 @@ const EventViewer = () => {
           </Button>
         </Box>
 
-        <Heading color="gray.800" mt="60px" mb="25px">
+        <Heading color={textColor} mt="60px" mb="25px">
           <TimeVisualizer date={new Date(event.date + event.offset)} />{" "}
           {event.title}
         </Heading>
@@ -106,7 +119,7 @@ const EventViewer = () => {
 
         <Box display="flex" gap="18">
           {event.links?.map((link) => (
-            <Link key={link.title} isExternal color="teal.500" href={link.url}>
+            <Link key={link.title} isExternal color={tealColor} href={link.url}>
               {link.title} <LinkIcon />
             </Link>
           ))}

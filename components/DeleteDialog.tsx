@@ -1,3 +1,4 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
 
 import {
@@ -9,8 +10,8 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
 
 type Props = {
   isOpen: boolean;
@@ -21,6 +22,8 @@ type Props = {
 const DeleteDialog = ({ isOpen, onClose, eventTitle }: Props) => {
   const cancelRef = useRef<HTMLButtonElement>(null);
 
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+
   return (
     <AlertDialog
       leastDestructiveRef={cancelRef}
@@ -28,7 +31,7 @@ const DeleteDialog = ({ isOpen, onClose, eventTitle }: Props) => {
       onClose={() => onClose()}
     >
       <AlertDialogOverlay />
-      <AlertDialogContent borderTop="solid red 5px">
+      <AlertDialogContent borderTop="solid red 5px" backgroundColor={bgColor}>
         <Box
           p="10px"
           left="50%"

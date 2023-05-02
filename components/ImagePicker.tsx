@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Card } from "@chakra-ui/react";
+import { Box, Card, useColorModeValue } from "@chakra-ui/react";
 
 import Image from "next/image";
 
@@ -36,6 +36,8 @@ const ImagePicker = ({ value, onChange }: Props) => {
     return onChange(images[index]);
   };
 
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+
   return (
     <Card
       variant="outline"
@@ -44,6 +46,7 @@ const ImagePicker = ({ value, onChange }: Props) => {
       m="50px auto"
       overflow="hidden"
       position="relative"
+      backgroundColor={bgColor}
     >
       {images.map((url, index) => (
         <Box

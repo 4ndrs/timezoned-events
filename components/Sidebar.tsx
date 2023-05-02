@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { MoonIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
@@ -39,6 +40,10 @@ const Sidebar = () => {
     setAddEventDialogIsOpen(false);
   };
 
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+  const textColor = useColorModeValue("primary.darkish", "dark.darkish");
+  const hoverColor = useColorModeValue("primary.sideHover", "dark.sideHover");
+
   return (
     <>
       <Box
@@ -47,14 +52,14 @@ const Sidebar = () => {
         top="0"
         h="100vh"
         w="307px"
-        backgroundColor="white"
+        backgroundColor={bgColor}
         boxShadow="2xl"
         display="flex"
         flexDirection="column"
         alignItems="center"
         flexShrink="0"
       >
-        <Heading color="gray.800" as="h1" fontSize="26px" mt="59" mb="67">
+        <Heading color={textColor} as="h1" fontSize="26px" mt="59" mb="67">
           Timezoned Events
         </Heading>
 
@@ -91,13 +96,13 @@ const Sidebar = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            color="gray.800"
+            color={textColor}
             fontSize="2xl"
             borderColor={
               selectedEventId === event.id ? "teal.500" : "transparent"
             }
             _hover={{
-              backgroundColor: "gray.50",
+              backgroundColor: hoverColor,
               cursor: "pointer",
             }}
           >

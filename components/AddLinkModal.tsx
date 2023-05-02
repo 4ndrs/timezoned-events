@@ -14,6 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import type { Link } from "@/interfaces";
@@ -47,6 +48,8 @@ const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
     }
   };
 
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -56,7 +59,7 @@ const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
           handleSubmit(onSubmit)(event);
         }}
       >
-        <ModalContent>
+        <ModalContent backgroundColor={bgColor}>
           <ModalHeader>Add link</ModalHeader>
           <ModalCloseButton />
 

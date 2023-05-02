@@ -18,6 +18,7 @@ import {
   ModalOverlay,
   Select,
   Textarea,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { UTC_OFFSETS, LOCAL_OFFSET } from "@/lib/offsets";
@@ -80,10 +81,12 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
     onClose();
   };
 
+  const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+
   return (
     <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent backgroundColor={bgColor}>
         <ModalHeader>{editEvent ? "Edit" : "Add"} event</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
