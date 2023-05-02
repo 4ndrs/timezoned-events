@@ -84,7 +84,12 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
         <ModalHeader>{editEvent ? "Edit" : "Add"} event</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalBody display="flex" flexDirection="column" gap="20px">
+          <ModalBody
+            display="flex"
+            flexDirection="column"
+            gap="20px"
+            color="gray.500"
+          >
             <FormControl isInvalid={!!errors.title}>
               <FormLabel>Title</FormLabel>
               <Input {...register("title", { required: "Required" })} />
