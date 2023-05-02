@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { MoonIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
 import { useEvents } from "@/context";
@@ -69,7 +69,13 @@ const Sidebar = () => {
             aria-label={`Switch to ${
               colorMode === "light" ? "dark" : "light"
             } mode`}
-            icon={<MoonIcon color="gray.500" w="30" h="30" />}
+            icon={
+              colorMode === "light" ? (
+                <MoonIcon color="gray.500" w="30" h="30" />
+              ) : (
+                <SunIcon color="gray.500" w="35" h="35" />
+              )
+            }
             variant="ghost"
           />
           <SettingsIcon color="gray.500" w="30" h="30" />
