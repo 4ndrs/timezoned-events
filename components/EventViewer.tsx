@@ -94,6 +94,7 @@ const EventViewer = () => {
         >
           {event.image && (
             <Image
+              priority
               src={event.image}
               alt="Image to hype up the mood"
               style={{ objectFit: "cover", width: "240px", height: "240px" }}
