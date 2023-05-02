@@ -67,6 +67,10 @@ const eventsReducer = (state: State, action: Action) => {
   }
 };
 
+const assertNever = (value: never) => {
+  throw new Error(`Unhanlded case: `, value);
+};
+
 const EventsContext = createContext<
   { state: State; dispatch: Dispatch } | undefined
 >(undefined);
@@ -92,10 +96,6 @@ const eventsInitializer = () => {
   }
 
   return parsed.data;
-};
-
-const assertNever = (value: never) => {
-  throw new Error(`Unhanlded case: `, value);
 };
 
 const EventsProvider = ({ children }: { children: React.ReactNode }) => {
