@@ -19,6 +19,7 @@ import {
   Select,
   Textarea,
   useColorModeValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 import { UTC_OFFSETS, LOCAL_OFFSET } from "@/lib/offsets";
@@ -82,9 +83,10 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
   };
 
   const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
+  const [smallPlease] = useMediaQuery("(max-width: 500px)");
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
+    <Modal isOpen={isOpen} onClose={handleClose} size={["full", null, "xl"]}>
       <ModalOverlay />
       <ModalContent backgroundColor={bgColor}>
         <ModalHeader>{editEvent ? "Edit" : "Add"} event</ModalHeader>
@@ -107,7 +109,11 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
               <Textarea minHeight="134px" {...register("description")} />
             </FormControl>
 
-            <Box display="flex" gap="16px">
+            <Box
+              display="flex"
+              gap="16px"
+              flexDirection={["column", null, "row"]}
+            >
               <FormControl flex="1" minWidth="0" isInvalid={!!errors.date}>
                 <FormLabel>Date</FormLabel>
                 <Input
@@ -153,7 +159,13 @@ const AddEventDialog = ({ isOpen, onClose, editEvent }: Props) => {
                 control={control}
                 name="image"
                 render={({ field: { value, onChange } }) => (
-                  <ImagePicker value={value} onChange={onChange} />
+                  <Box display="flex">
+                    <ImagePicker
+                      vertical={smallPlease}
+                      value={value}
+                      onChange={onChange}
+                    />
+                  </Box>
                 )}
               />
             </FormControl>
