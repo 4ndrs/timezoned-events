@@ -163,38 +163,42 @@ const Sidebar = () => {
         </Tooltip>
 
         {events.map((event) => (
-          <Box
-            key={event.id}
-            as="label"
-            alignSelf="stretch"
-            h={["45px", null, "65px"]}
-            borderRight="6px solid"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            color={textColor}
-            fontSize={["xl", null, "2xl"]}
-            borderColor={
-              selectedEventId === event.id ? "teal.500" : "transparent"
-            }
-            _hover={{
-              backgroundColor: hoverColor,
-              cursor: "pointer",
-            }}
-          >
+          <Tooltip key={event.id} label={event.title}>
             <Box
-              as="input"
-              type="radio"
-              name="sidebarEvent"
-              pos="absolute"
-              visibility="hidden"
-              checked={selectedEventId === event.id}
-              onChange={() =>
-                dispatch({ type: "updateSelectedEvent", id: event.id })
+              as="label"
+              alignSelf="stretch"
+              h={["45px", null, "65px"]}
+              pl={[4, null, 8]}
+              borderRight="6px solid"
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-start"
+              color={textColor}
+              fontSize={["xl", null, "2xl"]}
+              whiteSpace="nowrap"
+              overflow="hidden"
+              borderColor={
+                selectedEventId === event.id ? "teal.500" : "transparent"
               }
-            />
-            {event.title}
-          </Box>
+              _hover={{
+                backgroundColor: hoverColor,
+                cursor: "pointer",
+              }}
+            >
+              <Box
+                as="input"
+                type="radio"
+                name="sidebarEvent"
+                pos="absolute"
+                visibility="hidden"
+                checked={selectedEventId === event.id}
+                onChange={() =>
+                  dispatch({ type: "updateSelectedEvent", id: event.id })
+                }
+              />
+              {event.title}
+            </Box>
+          </Tooltip>
         ))}
 
         <Button
