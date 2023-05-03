@@ -3,7 +3,11 @@ import { Box, Card, useColorModeValue } from "@chakra-ui/react";
 
 import Image from "next/image";
 
-type Props = { value?: string; onChange: (value?: string) => void };
+type Props = {
+  value?: string;
+  onChange: (value?: string) => void;
+  vertical?: boolean;
+};
 
 const images = [
   "/images/no-image.svg",
@@ -11,7 +15,7 @@ const images = [
   "/images/fischl-hype.webp",
 ];
 
-const ImagePicker = ({ value, onChange }: Props) => {
+const ImagePicker = ({ value, onChange, vertical }: Props) => {
   const [pickedImageIndex, setPickedImageIndex] = useState(0);
 
   useEffect(() => {
@@ -41,8 +45,8 @@ const ImagePicker = ({ value, onChange }: Props) => {
   return (
     <Card
       variant="outline"
-      width="429px"
-      height="194px"
+      w={vertical ? "304px" : "429px"}
+      h={vertical ? "259px" : "194px"}
       m="50px auto"
       overflow="hidden"
       position="relative"
@@ -62,7 +66,7 @@ const ImagePicker = ({ value, onChange }: Props) => {
             transform:
               index === pickedImageIndex
                 ? "translate(-50%, -50%) scale(1.2)"
-                : `translateX(${
+                : `translate${vertical ? "Y" : "X"}(${
                     (index - pickedImageIndex) * 100
                   }%) translate(-50%, -50%)`,
           }}
