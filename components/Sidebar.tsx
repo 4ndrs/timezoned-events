@@ -83,7 +83,10 @@ const Sidebar = () => {
               variant="ghost"
             />
           </Tooltip>
-          <SettingsIcon color="gray.500" w="30" h="30" />
+
+          <Tooltip label="Settings unavailable">
+            <SettingsIcon color="gray.500" w="30" h="30" />
+          </Tooltip>
         </Box>
 
         <Tooltip label="Synchronization disabled">
