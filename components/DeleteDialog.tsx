@@ -31,7 +31,12 @@ const DeleteDialog = ({ isOpen, onClose, eventTitle }: Props) => {
       onClose={() => onClose()}
     >
       <AlertDialogOverlay />
-      <AlertDialogContent borderTop="solid red 5px" backgroundColor={bgColor}>
+      <AlertDialogContent
+        borderTop="solid red 5px"
+        backgroundColor={bgColor}
+        ml="25px"
+        mr="25px"
+      >
         <Box
           p="10px"
           left="50%"
