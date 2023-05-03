@@ -8,7 +8,14 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 
-import { MoonIcon, SunIcon, SettingsIcon, AddIcon } from "@chakra-ui/icons";
+import {
+  MoonIcon,
+  SunIcon,
+  SettingsIcon,
+  AddIcon,
+  HamburgerIcon,
+  CloseIcon,
+} from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
 import { useEvents } from "@/context";
@@ -18,8 +25,10 @@ import AddEventDialog from "./AddEventDialog";
 import type { TimezonedEvent } from "@/interfaces";
 
 const Sidebar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [addEventDialogIsOpen, setAddEventDialogIsOpen] = useState(false);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const {
     state: { events, selectedEventId },
@@ -47,10 +56,37 @@ const Sidebar = () => {
 
   return (
     <>
+      <IconButton
+        aria-label="Open sidebar"
+        icon={<HamburgerIcon w="32px" h="32px" />}
+        onClick={() => setSidebarIsOpen(true)}
+        pos="fixed"
+        top="15px"
+        left="15px"
+        zIndex="1"
+        variant="ghost"
+      />
+
+      <Box
+        zIndex={1}
+        display={sidebarIsOpen ? "block" : "none"}
+        position="fixed"
+        top="0"
+        bottom="0"
+        right="0"
+        left="0"
+        backgroundColor="black"
+        opacity="0.4"
+        overscrollBehavior="none"
+        onClick={() => setSidebarIsOpen(false)}
+      />
+
       <Box
         as="aside"
-        pos="sticky"
+        zIndex={1}
+        pos={["fixed", null, null, null, "sticky"]}
         top="0"
+        maxH="fill-available"
         h="100vh"
         w="307px"
         backgroundColor={bgColor}
@@ -59,7 +95,25 @@ const Sidebar = () => {
         flexDirection="column"
         alignItems="center"
         flexShrink="0"
+        transition="transform 200ms ease-out"
+        transform={[
+          sidebarIsOpen ? "translateX(0)" : "translateX(-100%)",
+          null,
+          null,
+          null,
+          "translateX(0)",
+        ]}
       >
+        <IconButton
+          aria-label="Close sidebar"
+          icon={<CloseIcon />}
+          variant="ghost"
+          position="absolute"
+          top="10px"
+          right="10px"
+          onClick={() => setSidebarIsOpen(false)}
+        />
+
         <Heading color={textColor} as="h1" fontSize="26px" mt="59" mb="67">
           Timezoned Events
         </Heading>
