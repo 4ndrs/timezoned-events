@@ -59,13 +59,13 @@ const AddLinkModal = ({ isOpen, onClose, existingTitles }: Props) => {
           handleSubmit(onSubmit)(event);
         }}
       >
-        <ModalContent backgroundColor={bgColor}>
+        <ModalContent backgroundColor={bgColor} mr="25px" ml="25px">
           <ModalHeader>Add link</ModalHeader>
           <ModalCloseButton />
 
           <ModalBody color="gray.500">
-            <Box display="flex" gap="10px">
-              <FormControl width="150px" isInvalid={!!errors.title}>
+            <Box display="flex" gap="10px" flexDirection={["column", "row"]}>
+              <FormControl width={[null, "150px"]} isInvalid={!!errors.title}>
                 <FormLabel>Title</FormLabel>
                 <Input
                   {...register("title", {
