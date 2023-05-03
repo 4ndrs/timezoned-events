@@ -1,38 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Timezoned Events
 
-## Getting Started
+Web app to keep track of events set in different timezones.
 
-First, run the development server:
+## Usage
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+To add new events it is necessary to have the date of the event plus the UTC offset. Let's take the following tweet as an example:
+<div align="center">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![1680064708108683](https://user-images.githubusercontent.com/31898900/236016692-4d22694f-b71f-433d-8675-10404726ea2c.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+</div>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Here, the event is a special program meant to happen on March 31st 2023 at 08:00 AM (**UTC-4**). We can use this information to add a new event:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<div align="center">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![1683141378115611](https://user-images.githubusercontent.com/31898900/236021430-d1b617d1-fecc-40eb-ab5a-a98010ecd386.png)
 
-## Learn More
+</div>
 
-To learn more about Next.js, take a look at the following resources:
+Here we set a title and description of our choice, and the date as shown in the above tweet with the UTC offset. The date and time will be localized using the browser's settings. By the default, the UTC offset will be set to your local one for convenience. It is also possible to add external links, or set one of the pictures available to hype up the mood a little bit.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+After adding the event, it will be shown on the main window as below:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<div align="center">
 
-## Deploy on Vercel
+![1683142610105339](https://user-images.githubusercontent.com/31898900/236027161-8bea5632-f659-4a7e-8f6e-777e1d0974d5.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+</div>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Misc
+
+The figma draft I worked with can be found [here](https://www.figma.com/file/GO3TQ76nGC0GxN4bQso73U). There are some notable differences since I tried to stick with Chakra UI's defaults as much as possible.
