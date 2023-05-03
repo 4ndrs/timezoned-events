@@ -91,7 +91,7 @@ const Sidebar = () => {
         h="100vh"
         w={["220px", null, "307px"]}
         backgroundColor={bgColor}
-        boxShadow="2xl"
+        boxShadow={[null, null, null, null, "2xl"]}
         display="flex"
         flexDirection="column"
         alignItems="center"
