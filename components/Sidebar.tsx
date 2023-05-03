@@ -60,6 +60,7 @@ const Sidebar = () => {
         aria-label="Open sidebar"
         icon={<HamburgerIcon w="32px" h="32px" />}
         onClick={() => setSidebarIsOpen(true)}
+        display={["block", null, null, null, "none"]}
         pos="fixed"
         top="15px"
         left="15px"
@@ -106,6 +107,7 @@ const Sidebar = () => {
       >
         <IconButton
           aria-label="Close sidebar"
+          display={["block", null, null, null, "none"]}
           icon={<CloseIcon />}
           variant="ghost"
           position="absolute"
