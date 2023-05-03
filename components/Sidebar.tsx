@@ -89,7 +89,7 @@ const Sidebar = () => {
         top="0"
         maxH="fill-available"
         h="100vh"
-        w="307px"
+        w={["220px", null, "307px"]}
         backgroundColor={bgColor}
         boxShadow="2xl"
         display="flex"
@@ -116,11 +116,17 @@ const Sidebar = () => {
           onClick={() => setSidebarIsOpen(false)}
         />
 
-        <Heading color={textColor} as="h1" fontSize="26px" mt="59" mb="67">
+        <Heading
+          color={textColor}
+          as="h1"
+          fontSize={["20px", null, "26px"]}
+          mt="59"
+          mb={["45", null, "67"]}
+        >
           Timezoned Events
         </Heading>
 
-        <Box display="flex" gap="37px" alignItems="center">
+        <Box display="flex" gap={["25px", null, "37px"]} alignItems="center">
           <Tooltip
             label={`Switch to ${colorMode === "light" ? "dark" : "light"} mode`}
           >
@@ -131,9 +137,9 @@ const Sidebar = () => {
               } mode`}
               icon={
                 colorMode === "light" ? (
-                  <MoonIcon color="gray.500" w="30" h="30" />
+                  <MoonIcon color="gray.500" boxSize={["28px", null, "33px"]} />
                 ) : (
-                  <SunIcon color="gray.500" w="35" h="35" />
+                  <SunIcon color="gray.500" boxSize={["28px", null, "33px"]} />
                 )
               }
               variant="ghost"
@@ -141,7 +147,7 @@ const Sidebar = () => {
           </Tooltip>
 
           <Tooltip label="Settings unavailable">
-            <SettingsIcon color="gray.500" w="30" h="30" />
+            <SettingsIcon color="gray.500" boxSize={["25px", null, "30px"]} />
           </Tooltip>
         </Box>
 
@@ -149,8 +155,8 @@ const Sidebar = () => {
           <Box
             w="10px"
             h="10px"
-            mt="9"
-            mb="35"
+            mt={["5", null, "9"]}
+            mb={["25", null, "35"]}
             borderRadius="full"
             backgroundColor="gray.600"
           />
@@ -161,13 +167,13 @@ const Sidebar = () => {
             key={event.id}
             as="label"
             alignSelf="stretch"
-            h="65px"
+            h={["45px", null, "65px"]}
             borderRight="6px solid"
             display="flex"
             alignItems="center"
             justifyContent="center"
             color={textColor}
-            fontSize="2xl"
+            fontSize={["xl", null, "2xl"]}
             borderColor={
               selectedEventId === event.id ? "teal.500" : "transparent"
             }
