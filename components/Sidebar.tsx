@@ -95,6 +95,7 @@ const Sidebar = () => {
         display="flex"
         flexDirection="column"
         alignItems="center"
+        justifyContent="space-between"
         flexShrink="0"
         transition="transform 200ms ease-out"
         transform={[
@@ -105,107 +106,125 @@ const Sidebar = () => {
           "translateX(0)",
         ]}
       >
-        <IconButton
-          aria-label="Close sidebar"
-          display={["block", null, null, null, "none"]}
-          icon={<CloseIcon />}
-          variant="ghost"
-          position="absolute"
-          top="10px"
-          right="10px"
-          onClick={() => setSidebarIsOpen(false)}
-        />
-
-        <Heading
-          color={textColor}
-          as="h1"
-          fontSize={["20px", null, "26px"]}
-          mt="59"
-          mb={["45", null, "67"]}
+        <Box
+          pos="relative"
+          display="flex"
+          flexDirection="column"
+          w="100%"
+          alignItems="center"
+          overflow="scroll"
         >
-          Timezoned Events
-        </Heading>
+          <IconButton
+            aria-label="Close sidebar"
+            display={["block", null, null, null, "none"]}
+            icon={<CloseIcon />}
+            variant="ghost"
+            position="absolute"
+            top="10px"
+            right="10px"
+            onClick={() => setSidebarIsOpen(false)}
+          />
 
-        <Box display="flex" gap={["25px", null, "37px"]} alignItems="center">
-          <Tooltip
-            label={`Switch to ${colorMode === "light" ? "dark" : "light"} mode`}
+          <Heading
+            color={textColor}
+            as="h1"
+            fontSize={["20px", null, "26px"]}
+            mt="59"
+            mb={["45", null, "67"]}
           >
-            <IconButton
-              onClick={toggleColorMode}
-              aria-label={`Switch to ${
+            Timezoned Events
+          </Heading>
+
+          <Box display="flex" gap={["25px", null, "37px"]} alignItems="center">
+            <Tooltip
+              label={`Switch to ${
                 colorMode === "light" ? "dark" : "light"
               } mode`}
-              icon={
-                colorMode === "light" ? (
-                  <MoonIcon color="gray.500" boxSize={["28px", null, "33px"]} />
-                ) : (
-                  <SunIcon color="gray.500" boxSize={["28px", null, "33px"]} />
-                )
-              }
-              variant="ghost"
+            >
+              <IconButton
+                onClick={toggleColorMode}
+                aria-label={`Switch to ${
+                  colorMode === "light" ? "dark" : "light"
+                } mode`}
+                icon={
+                  colorMode === "light" ? (
+                    <MoonIcon
+                      color="gray.500"
+                      boxSize={["28px", null, "33px"]}
+                    />
+                  ) : (
+                    <SunIcon
+                      color="gray.500"
+                      boxSize={["28px", null, "33px"]}
+                    />
+                  )
+                }
+                variant="ghost"
+              />
+            </Tooltip>
+
+            <Tooltip label="Settings unavailable">
+              <SettingsIcon color="gray.500" boxSize={["25px", null, "30px"]} />
+            </Tooltip>
+          </Box>
+
+          <Tooltip label="Synchronization disabled">
+            <Box
+              w="10px"
+              h="10px"
+              mt={["5", null, "9"]}
+              mb={["25", null, "35"]}
+              borderRadius="full"
+              backgroundColor="gray.600"
             />
           </Tooltip>
 
-          <Tooltip label="Settings unavailable">
-            <SettingsIcon color="gray.500" boxSize={["25px", null, "30px"]} />
-          </Tooltip>
-        </Box>
-
-        <Tooltip label="Synchronization disabled">
-          <Box
-            w="10px"
-            h="10px"
-            mt={["5", null, "9"]}
-            mb={["25", null, "35"]}
-            borderRadius="full"
-            backgroundColor="gray.600"
-          />
-        </Tooltip>
-
-        {events.map((event) => (
-          <Tooltip key={event.id} label={event.title}>
-            <Box
-              as="label"
-              alignSelf="stretch"
-              h={["45px", null, "65px"]}
-              pl={[4, null, 8]}
-              borderRight="6px solid"
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-start"
-              color={textColor}
-              fontSize={["xl", null, "2xl"]}
-              whiteSpace="nowrap"
-              overflow="hidden"
-              borderColor={
-                selectedEventId === event.id ? "teal.500" : "transparent"
-              }
-              _hover={{
-                backgroundColor: hoverColor,
-                cursor: "pointer",
-              }}
-            >
+          {events.map((event) => (
+            <Tooltip key={event.id} label={event.title}>
               <Box
-                as="input"
-                type="radio"
-                name="sidebarEvent"
-                pos="absolute"
-                visibility="hidden"
-                checked={selectedEventId === event.id}
-                onChange={() =>
-                  dispatch({ type: "updateSelectedEvent", id: event.id })
+                as="label"
+                alignSelf="stretch"
+                h={["45px", null, "65px"]}
+                pl={[4, null, 8]}
+                borderRight="6px solid"
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-start"
+                color={textColor}
+                fontSize={["xl", null, "2xl"]}
+                whiteSpace="nowrap"
+                overflow="hidden"
+                borderColor={
+                  selectedEventId === event.id ? "teal.500" : "transparent"
                 }
-              />
-              {event.title}
-            </Box>
-          </Tooltip>
-        ))}
+                _hover={{
+                  backgroundColor: hoverColor,
+                  cursor: "pointer",
+                }}
+              >
+                <Box
+                  as="input"
+                  type="radio"
+                  name="sidebarEvent"
+                  pos="absolute"
+                  visibility="hidden"
+                  checked={selectedEventId === event.id}
+                  onChange={() =>
+                    dispatch({ type: "updateSelectedEvent", id: event.id })
+                  }
+                />
+                {event.title}
+              </Box>
+            </Tooltip>
+          ))}
+        </Box>
 
         <Button
           leftIcon={<AddIcon />}
           colorScheme="teal"
-          pos="absolute"
-          bottom="34"
+          flexShrink="0"
+          mt="30px"
+          mb="30px"
           onClick={() => setAddEventDialogIsOpen(true)}
         >
           Add event
