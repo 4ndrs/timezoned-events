@@ -86,16 +86,16 @@ const Sidebar = () => {
           <SettingsIcon color="gray.500" w="30" h="30" />
         </Box>
 
-        <Box
-          w="10px"
-          h="10px"
-          mt="9"
-          mb="35"
-          borderRadius="full"
-          backgroundColor="gray.600"
-        >
-          {/* Synchronization status indicator */}
-        </Box>
+        <Tooltip label="Synchronization disabled">
+          <Box
+            w="10px"
+            h="10px"
+            mt="9"
+            mb="35"
+            borderRadius="full"
+            backgroundColor="gray.600"
+          />
+        </Tooltip>
 
         {events.map((event) => (
           <Box
