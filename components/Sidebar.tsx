@@ -78,7 +78,6 @@ const Sidebar = () => {
         left="0"
         backgroundColor="black"
         opacity="0.4"
-        overscrollBehavior="none"
         onClick={() => setSidebarIsOpen(false)}
       />
 
@@ -112,7 +111,8 @@ const Sidebar = () => {
           flexDirection="column"
           w="100%"
           alignItems="center"
-          overflow="scroll"
+          overflowY="scroll"
+          sx={{ "::-webkit-scrollbar": { display: "none" } }}
         >
           <IconButton
             aria-label="Close sidebar"
@@ -176,6 +176,7 @@ const Sidebar = () => {
               mb={["25", null, "35"]}
               borderRadius="full"
               backgroundColor="gray.600"
+              flexShrink="0"
             />
           </Tooltip>
 
@@ -194,6 +195,7 @@ const Sidebar = () => {
                 fontSize={["xl", null, "2xl"]}
                 whiteSpace="nowrap"
                 overflow="hidden"
+                flexShrink="0"
                 borderColor={
                   selectedEventId === event.id ? "teal.500" : "transparent"
                 }
