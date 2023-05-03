@@ -22,9 +22,12 @@ const TimeVisualizer = ({ date }: { date: Date }) => {
 
   return (
     <>
-      <Box display="inline-block">{days}</Box>{" "}
-      <Box display="inline-block">{hours}</Box>{" "}
-      <Box display="inline-block">{minutes}</Box>{" "}
+      <Box display="inline-block">{days}</Box>
+      {days && " "}
+      <Box display="inline-block">{hours}</Box>
+      {hours && " "}
+      <Box display="inline-block">{minutes}</Box>
+      {minutes && " "}
       <Box display="inline-block">{seconds}</Box>
       <br />
       {timer > 0 ? "until" : "have passed since"}
