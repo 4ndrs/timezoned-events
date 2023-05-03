@@ -1,4 +1,5 @@
 import { useTimer } from "@/hooks";
+import { Box } from "@chakra-ui/react";
 
 const TimeVisualizer = ({ date }: { date: Date }) => {
   const timer = useTimer(date.getTime());
@@ -21,7 +22,10 @@ const TimeVisualizer = ({ date }: { date: Date }) => {
 
   return (
     <>
-      {days} {hours} {minutes} {seconds}
+      <Box display="inline-block">{days}</Box>{" "}
+      <Box display="inline-block">{hours}</Box>{" "}
+      <Box display="inline-block">{minutes}</Box>{" "}
+      <Box display="inline-block">{seconds}</Box>
       <br />
       {timer > 0 ? "until" : "have passed since"}
     </>
