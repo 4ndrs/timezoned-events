@@ -19,7 +19,7 @@ Here, the event is a special program meant to happen on March 31st 2023 at 08:00
 
 </div>
 
-Here we set a title and description of our choice, and the date as shown in the above tweet with the UTC offset. The date and time will be localized using the browser's settings. By the default, the UTC offset will be set to your local one for convenience. It is also possible to add external links, or set one of the pictures available to hype up the mood a little bit.
+Here we set a title and description of our choice, and the date as shown in the above tweet with the UTC offset. The date and time will be localized using the browser's settings. By default, the UTC offset will be set to your local one for convenience. It is also possible to add external links, or set one of the pictures available to hype up the mood a little bit.
 
 After adding the event, it will be shown on the main window as below:
 
