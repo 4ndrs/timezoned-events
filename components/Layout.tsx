@@ -8,7 +8,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const bgColor = useColorModeValue("primary.bg", "dark.bg");
 
   return (
-    <Box display="flex" backgroundColor={bgColor}>
+    <Box
+      display="flex"
+      flexDirection={["column", null, null, null, "row"]}
+      backgroundColor={bgColor}
+    >
       <Head>
         <meta
           name="description"
@@ -21,12 +25,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        minHeight="100vh"
+        minHeight={["calc(100vh - 50px)", null, null, null, "100vh"]}
         flex="1"
       >
-        <Box mt="auto" mb="auto">
-          {children}
-        </Box>
+        <Box m="auto 0">{children}</Box>
         <Footer />
       </Box>
     </Box>

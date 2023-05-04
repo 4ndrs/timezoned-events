@@ -9,6 +9,7 @@ import {
   Link,
   Text,
   useColorModeValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 import TimeVisualizer from "./TimeVisualizer";
@@ -27,6 +28,8 @@ const EventViewer = () => {
   const bgColor = useColorModeValue("primary.whitish", "dark.whitish");
   const textColor = useColorModeValue("primary.darkish", "dark.darkish");
   const tealColor = useColorModeValue("primary.teal", "dark.teal");
+
+  const [isSmall] = useMediaQuery("(max-width: 768px)");
 
   const {
     dispatch,
@@ -61,15 +64,14 @@ const EventViewer = () => {
   };
 
   return (
-    <>
+    <Box display="flex" justifyContent="center">
       <Card
-        p="45px 65px"
+        p={["20px", null, "45px 65px"]}
         display="flex"
         flexDirection="column"
         alignItems="flex-start"
         maxWidth="1113px"
-        ml="auto"
-        mr="auto"
+        m="20px"
         backgroundColor={bgColor}
       >
         <Box alignSelf="flex-end" display="flex" gap="21">
@@ -91,7 +93,11 @@ const EventViewer = () => {
           </Button>
         </Box>
 
-        <Heading color={textColor} mt="60px" mb="25px">
+        <Heading
+          color={textColor}
+          m={["20px 0 10px", null, null, "60px 0 25px"]}
+          fontSize={["2xl", null, "3xl", null, "4xl"]}
+        >
           <TimeVisualizer date={new Date(event.date + event.offset)} />{" "}
           {event.title}
         </Heading>
@@ -102,15 +108,18 @@ const EventViewer = () => {
           borderRadius="2xl"
           overflow="hidden"
           alignSelf="center"
-          mt="98px"
-          mb="133px"
+          m={["60px 0 100px", null, "98px 0 133px"]}
         >
           {event.image && (
             <Image
               priority
               src={event.image}
               alt="Image to hype up the mood"
-              style={{ objectFit: "cover", width: "240px", height: "240px" }}
+              style={{
+                objectFit: "cover",
+                width: isSmall ? "140px" : "240px",
+                height: isSmall ? "140px" : "240px",
+              }}
               width={240}
               height={240}
             />
@@ -137,7 +146,7 @@ const EventViewer = () => {
         onClose={handleEdit}
         editEvent={event}
       />
-    </>
+    </Box>
   );
 };
 

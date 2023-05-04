@@ -61,10 +61,9 @@ const Sidebar = () => {
         icon={<HamburgerIcon w="32px" h="32px" />}
         onClick={() => setSidebarIsOpen(true)}
         display={["block", null, null, null, "none"]}
-        pos="fixed"
-        top="15px"
-        left="15px"
-        zIndex="1"
+        alignSelf="flex-start"
+        ml="20px"
+        mt="10px"
         variant="ghost"
       />
 
