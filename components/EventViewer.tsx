@@ -64,13 +64,13 @@ const EventViewer = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="center">
+    <Box display="flex" maxWidth="1113px" m="0 auto">
       <Card
+        flex="1"
         p={["20px", null, "45px 65px"]}
         display="flex"
         flexDirection="column"
         alignItems="flex-start"
-        maxWidth="1113px"
         m="20px"
         backgroundColor={bgColor}
       >
