@@ -75,34 +75,34 @@ const EventsContext = createContext<
   { state: State; dispatch: Dispatch } | undefined
 >(undefined);
 
-const eventsInitializer = () => {
-  const initialEvents: TimezonedEvent[] = [];
+const parseStoredEvents = () => {
+  let events: TimezonedEvent[] = [];
 
   const storedEvents = localStorage.getItem("TimezonedEvents");
 
   if (!storedEvents) {
-    return initialEvents;
+    return events;
   }
 
   const parsed = StoredEventsSchema.safeParse(JSON.parse(storedEvents));
 
-  if (!parsed.success) {
+  if (parsed.success) {
+    events = parsed.data;
+  } else {
     console.error(
       "Failed parsing the events stored in the local storage\n",
       parsed.error.message
     );
-
-    return initialEvents;
   }
 
-  return parsed.data;
+  return events;
 };
 
 const EventsProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(eventsReducer, { events: [] });
 
   useEffect(() => {
-    const initialEvents = eventsInitializer();
+    const initialEvents = parseStoredEvents();
 
     dispatch({ type: "setAll", payload: initialEvents });
   }, []);
