@@ -84,16 +84,7 @@ const parseStoredEvents = () => {
     return events;
   }
 
-  const parsed = StoredEventsSchema.safeParse(JSON.parse(storedEvents));
-
-  if (parsed.success) {
-    events = parsed.data;
-  } else {
-    console.error(
-      "Failed parsing the events stored in the local storage\n",
-      parsed.error.message
-    );
-  }
+  events = StoredEventsSchema.parse(JSON.parse(storedEvents));
 
   return events;
 };
@@ -102,9 +93,18 @@ const EventsProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(eventsReducer, { events: [] });
 
   useEffect(() => {
-    const initialEvents = parseStoredEvents();
+    try {
+      const initialEvents = parseStoredEvents();
 
-    dispatch({ type: "setAll", payload: initialEvents });
+      dispatch({ type: "setAll", payload: initialEvents });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(
+          "Failed parsing the events stored in the local storage\n",
+          error.message
+        );
+      }
+    }
   }, []);
 
   const initialRender = useRef(true);
