@@ -105,6 +105,29 @@ const EventsProvider = ({ children }: { children: React.ReactNode }) => {
         );
       }
     }
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key !== "TimezonedEvents") {
+        return;
+      }
+
+      try {
+        const events = parseStoredEvents();
+
+        dispatch({ type: "setAll", payload: events });
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(
+            "Detected storage change but failed the parsing\n",
+            error.message
+          );
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const initialRender = useRef(true);
